@@ -24,10 +24,21 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $result = [
             'status' => $this->status,
             'message' => $this->message,
-            'data' => $this->resource,
+            'data' => [],
         ];
+
+        foreach ($this->resource as $comment) {
+            // Konversi objek komentar menjadi array
+            $commentArray = json_decode(json_encode($comment), true);
+            
+            // Buat salinan komentar tanpa 'user_id' dan 'news_id'.
+            $commentWithoutIds = array_diff_key($commentArray, ['user_id' => 0, 'news_id' => 0,'updated_at' => 0]);
+            $result['data'][] = $commentWithoutIds;
+        }
+
+        return $result;
     }
 }

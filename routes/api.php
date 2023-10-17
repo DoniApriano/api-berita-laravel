@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CommentController;
+use App\Http\Controllers\api\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Route Comment
     Route::get('/comment',[CommentController::class,'index']);
+    Route::get('/news/{id}/comment',[CommentController::class,'showCommentByNews']);
+    Route::post('/comment',[CommentController::class,'store']);
 
     Route::get('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);

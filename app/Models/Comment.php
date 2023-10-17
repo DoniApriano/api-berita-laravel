@@ -12,7 +12,8 @@ class Comment extends Model
 
     protected $fillable = [
         'text',
-        'news_id'
+        'news_id',
+        'user_id',
     ];
     public function user() : BelongsTo {
         return $this->belongsTo(User::class,'user_id','id');
