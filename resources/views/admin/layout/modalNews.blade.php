@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('news.update', $a->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('normal.news.update', $a->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row text-center mb-3">
@@ -27,7 +27,7 @@
                         <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
                         <div class="col-sm-10">
                             <textarea id="content1" type="text" name="news_content"
-                                class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name">{{$a->news_content}}</textarea>
+                                class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name">{{ $a->news_content }}</textarea>
                             <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
                             <script>
                                 var konten = document.getElementById("content1");

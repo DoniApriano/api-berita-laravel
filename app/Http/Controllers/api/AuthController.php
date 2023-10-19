@@ -43,6 +43,10 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
     }
 
+    public function register()
+    {
+    }
+
     public function me(Request $request)
     {
         $user = Auth::user();

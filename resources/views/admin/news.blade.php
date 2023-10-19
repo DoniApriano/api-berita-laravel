@@ -13,7 +13,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('normal.news.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
@@ -86,6 +86,7 @@
                                 <th>Title</th>
                                 <th>News Content</th>
                                 <th>Category</th>
+                                <th>Comment</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -103,7 +104,6 @@
                                             $limitedArticle = Str::limit($article, $limit = 50, $end = '...');
                                             $replacedText = str_replace('contoh', 'contoh lain', $limitedArticle);
                                         @endphp
-
                                             {{ $replacedText }}</p>
                                     </td>
                                     @foreach ($category as $c)
@@ -112,7 +112,12 @@
                                         @endif
                                     @endforeach
                                     <td>
-                                        <form action="{{ route('news.destroy', $a->id) }}"
+                                        <button type="button" class="btn btn-success comment-button" data-bs-toggle="modal"
+                                            data-bs-target="#commentNews{{ $a->id }}"
+                                            data-newsid="{{ $a->id }}">Comment</button>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('normal.news.destroy', $a->id) }}"
                                             onsubmit="return confirm('Yakin?')" method="post">
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#editNews{{ $a->id }}"><i
@@ -138,5 +143,6 @@
             </div>
         </div>
     </div>
+    @include('admin.layout.modalComment')
 
 @endsection

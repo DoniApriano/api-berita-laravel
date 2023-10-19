@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\NewsController;
+use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,20 +23,22 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route News
-    Route::get('/news',[NewsController::class,'index']);
-    Route::get('/news/{id}',[NewsController::class,'show']);
-    Route::post('/news',[NewsController::class,'store']);
-    Route::put('/news/{id}',[NewsController::class,'update'])->middleware('news-owner');
-    Route::delete('/news/{id}',[NewsController::class,'delete'])->middleware('news-owner');
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
+    Route::post('/news', [NewsController::class, 'store']);
+    Route::put('/news/{id}', [NewsController::class, 'update'])->middleware('news-owner');
+    Route::delete('/news/{id}', [NewsController::class, 'delete'])->middleware('news-owner');
 
     // Route Comment
-    Route::get('/comment',[CommentController::class,'index']);
-    Route::get('/news/{id}/comment',[CommentController::class,'showCommentByNews']);
-    Route::post('/comment',[CommentController::class,'store']);
+    Route::get('/comment', [CommentController::class, 'index']);
+    Route::get('/news/{id}/comment', [CommentController::class, 'showCommentByNews']);
+    Route::post('/comment', [CommentController::class, 'store']);
 
     Route::get('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::get('/user/{id}',[UserController::class,'getUser']);
 });

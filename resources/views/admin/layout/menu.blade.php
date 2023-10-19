@@ -55,18 +55,41 @@
 
     <div class="menu-inner-shadow"></div>
 
-    <ul class="menu-inner py-1">
-        <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
-            <a href="{{ route('admin.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
-            <a href="{{ route('news.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">News</div>
-            </a>
-        </li>
-    </ul>
+    @if (Auth::user()->role == 'root')
+        <ul class="menu-inner py-1">
+            <li class="menu-item {{ Request::is('root') ? 'active' : '' }}">
+                <a href="{{ route('normal.admin.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
+                <a href="{{ route('normal.news.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">News</div>
+                </a>
+            </li>
+        </ul>
+    @else
+        <ul class="menu-inner py-1">
+            <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
+                <a href="{{ route('normal.admin.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
+                <a href="{{ route('normal.news.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">News</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
+                <a href="{{ route('normal.news.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">News Normal</div>
+                </a>
+            </li>
+        </ul>
+    @endif
 </aside>

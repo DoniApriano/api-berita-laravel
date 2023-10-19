@@ -78,7 +78,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <form action="{{ route('admin.logout') }}" method="post">
+                        <form action="{{ route('normal.admin.logout') }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="dropdown-item">

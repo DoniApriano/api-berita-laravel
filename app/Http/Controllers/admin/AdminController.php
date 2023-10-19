@@ -12,6 +12,14 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user()->username;
-        return view('admin.index',compact('user'));
+        $userRole = Auth::user()->role;
+        return view('admin.index',compact(['user','userRole']));
+    }
+
+    public function indexRoot()
+    {
+        $user = Auth::user()->username;
+        $userRole = Auth::user()->role;
+        return view("admin.index",compact(["user","userRole"]));
     }
 }
