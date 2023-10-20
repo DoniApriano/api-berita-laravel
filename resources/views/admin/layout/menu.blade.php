@@ -58,15 +58,21 @@
     @if (Auth::user()->role == 'root')
         <ul class="menu-inner py-1">
             <li class="menu-item {{ Request::is('root') ? 'active' : '' }}">
-                <a href="{{ route('normal.admin.index') }}" class="menu-link">
+                <a href="{{ route('root.admin.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">Dashboard</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
-                <a href="{{ route('normal.news.index') }}" class="menu-link">
+            <li class="menu-item {{ Request::is('newsRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.newsRoot.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">News</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('userRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.userRoot.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">User</div>
                 </a>
             </li>
         </ul>

@@ -1,81 +1,86 @@
 @extends('admin.layout.app')
 @section('content')
     <div class="container mt-3">
-        <div class="col-xxl">
-            <div class="card mb-4">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Tambah News</h5>
-                </div>
-                <div class="card-body">
-                    @if (Session::has('success'))
-                        <div id="myalert" class="alert alert-success alert-dismissible" role="alert">
-                            {{ Session::get('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    <form action="{{ route('normal.news.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="image"
-                                    class="form-control @error('image') is-invalid @enderror" id="basic-default-name">
+        @if (Auth::user()->role == 'normal')
+            <div class="col-xxl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Tambah News</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Session::has('success'))
+                            <div id="myalert" class="alert alert-success alert-dismissible" role="alert">
+                                {{ Session::get('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                            @error('image')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                        @endif
+                        <form action="{{ route('normal.news.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
+                                <div class="col-sm-10">
+                                    <input type="file" name="image"
+                                        class="form-control @error('image') is-invalid @enderror" id="basic-default-name">
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-message">Title</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="title"
-                                    class="form-control @error('name') is-invalid @enderror" id="basic-default-name">
+                                @error('image')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('title')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-message">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="title"
+                                        class="form-control @error('name') is-invalid @enderror" id="basic-default-name">
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
-                            <div class="col-sm-10">
-                                <textarea id="content" type="text" name="news_content"
-                                    class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name"></textarea>
+                                @error('title')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('news_content')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
+                                <div class="col-sm-10">
+                                    <textarea id="content" type="text" name="news_content"
+                                        class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name"></textarea>
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-message">News Category</label>
-                            <div class="col-sm-10">
-                                <select class="form-select form-select-lg" name="category_id" id="basic-default-message">
-                                    <option selected>Pilih Kategori</option>
-                                    @foreach ($category as $c)
-                                        <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                    @endforeach
-                                </select>
+                                @error('news_content')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                            @error('category')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-message">News Category</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select form-select-lg" name="category_id"
+                                        id="basic-default-message">
+                                        <option selected>Pilih Kategori</option>
+                                        @foreach ($category as $c)
+                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @enderror
-                        </div>
-                        <div class="row justify-content-end mt-3">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                @error('category')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
-                        </div>
-                    </form>
+                            <div class="row justify-content-end mt-3">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else
+            <h1>All News</h1>
+        @endif
         <div class="col-xxl">
             <div class="card">
                 <div class="table-responsive text-nowrap">
@@ -115,18 +120,29 @@
                                         <button type="button" class="btn btn-success comment-button" data-bs-toggle="modal"
                                             data-bs-target="#commentNews{{ $a->id }}"
                                             data-newsid="{{ $a->id }}">Comment</button>
+                                        @include('admin.layout.modalComment')
                                     </td>
                                     <td>
-                                        <form action="{{ route('normal.news.destroy', $a->id) }}"
-                                            onsubmit="return confirm('Yakin?')" method="post">
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#editNews{{ $a->id }}"><i
-                                                    class="bx bx-edit-alt me-2"></i></button>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i
-                                                    class="bx bx-trash me-1"></i></button>
-                                        </form>
+                                        @if (Auth::user()->role == 'normal')
+                                            <form action="{{ route('normal.news.destroy', $a->id) }}"
+                                                onsubmit="return confirm('Yakin?')" method="post">
+                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#editNews{{ $a->id }}"><i
+                                                        class="bx bx-edit-alt me-2"></i></button>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="bx bx-trash me-1"></i></button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('root.newsRoot.destroy', $a->id) }}"
+                                                onsubmit="return confirm('Yakin?')" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="bx bx-trash me-1"></i></button>
+                                            </form>
+                                        @endif
                                         @include('admin.layout.modalNews')
                                     </td>
                                 </tr>
@@ -143,6 +159,4 @@
             </div>
         </div>
     </div>
-    @include('admin.layout.modalComment')
-
 @endsection

@@ -30,7 +30,6 @@ class AuthController extends Controller
                 return redirect()->route('normal.admin.index');
             }
         }
-
         return back()->with('error', 'Email dan Password tidak cocok');
     }
 

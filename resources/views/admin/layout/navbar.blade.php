@@ -78,13 +78,23 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <form action="{{ route('normal.admin.logout') }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="dropdown-item">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
-                            </button>
+                        @if (Auth::user()->role == 'root')
+                            <form action="{{ route('root.admin.logout') }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </button>
+                            @else
+                                <form action="{{ route('normal.admin.logout') }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Log Out</span>
+                                    </button>
+                        @endif
                         </form>
                     </li>
                 </ul>

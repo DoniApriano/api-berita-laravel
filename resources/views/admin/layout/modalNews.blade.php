@@ -26,11 +26,12 @@
                     <div class="row text-center mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
                         <div class="col-sm-10">
-                            <textarea id="content1" type="text" name="news_content"
+                            <textarea id="content{{ $a->id }}" type="text" name="news_content konten"
                                 class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name">{{ $a->news_content }}</textarea>
                             <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
                             <script>
-                                var konten = document.getElementById("content1");
+                                var id = "content"+{{$a->id}};
+                                var konten = document.getElementById(id);
                                 CKEDITOR.replace(konten, {
                                     language: 'en-gb'
                                 });
@@ -39,12 +40,14 @@
                         </div>
                     </div>
                     <div class="row text-center mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
+                        <label class="col-sm-2 col-form-label" for="basic-default-message">News Category</label>
                         <div class="col-sm-10">
                             <select class="form-select form-select-lg" name="category_id" id="basic-default-message">
-                                <option selected>Pilih Kategori</option>
                                 @foreach ($category as $c)
-                                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                    <option value="{{ $c->id }}"
+                                        {{ $c->id === $a->category_id ? 'selected' : '' }}>
+                                        {{ $c->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\NormalNewsController;
+use App\Http\Controllers\admin\RootNewsController;
+use App\Http\Controllers\admin\RootUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,9 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => 'check-role:root', 'as' => 'root.'], function () {
     Route::get('/root', [AdminController::class,'indexRoot'])->name('admin.index');
+    Route::delete('/logoutRoot', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::resource('/newsRoot', RootNewsController::class);
+    Route::resource('/userRoot', RootUserController::class);
 });
 Route::group(['middleware' => 'check-role:normal', 'as' => 'normal.'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
