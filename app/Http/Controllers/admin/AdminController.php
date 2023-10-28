@@ -13,13 +13,15 @@ class AdminController extends Controller
     {
         $user = Auth::user()->username;
         $userRole = Auth::user()->role;
-        return view('admin.index',compact(['user','userRole']));
+        $profilePicture = Auth::user()->profile_picture;
+        return view('admin.index',compact(['user','userRole','profilePicture']));
     }
 
     public function indexRoot()
     {
         $user = Auth::user()->username;
         $userRole = Auth::user()->role;
-        return view("admin.index",compact(["user","userRole"]));
+        $profilePicture = Auth::user()->profile_picture;
+        return view("admin.index",compact(["user","userRole","profilePicture"]));
     }
 }

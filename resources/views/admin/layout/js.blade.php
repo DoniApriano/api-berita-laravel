@@ -33,11 +33,13 @@
 <script>
     $('#myalert').delay('slow').slideDown('slow').delay(4000).slideUp(600);
 </script>
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+{{-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
     var konten = document.getElementById("content");
     CKEDITOR.replace(konten, {
-        language: 'en-gb'
+        language: 'en-gb',
+        enterMode: CKEDITOR.ENTER_BR,
+        autoParagraph: false,
     });
     CKEDITOR.config.allowedContent = true;
-</script>
+</script> --}}

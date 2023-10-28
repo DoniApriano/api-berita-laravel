@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RootNewsController extends Controller
 {
@@ -13,7 +14,8 @@ class RootNewsController extends Controller
     {
         $news = News::get();
         $category = Category::get();
+        $profilePicture = Auth::user()->profile_picture;
 
-        return view('admin.news', compact(['news', 'category']));
+        return view('admin.news', compact(['news', 'category','profilePicture']));
     }
 }

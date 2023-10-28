@@ -15,14 +15,14 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::get();
-        return new NewsResource(true,'Berhasil Fetch Data',$news);
+        $news = News::with('category:id,name')->with('user:id,username')->get();
+        return new NewsResource(true, 'Berhasil Fetch Data', $news);
     }
 
     public function show($id)
     {
         $news = News::with('category:id,name')->with('user:id,username')->findOrFail($id);
-        return new NewsDetailResource(true,'Berhasil Fetch Data',$news);
+        return new NewsDetailResource(true, 'Berhasil Fetch Data', $news);
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class NewsController extends Controller
             'user_id'     => $userId,
             'category_id'     => $request->category_id,
         ]);
-        return new NewsDetailResource(true,'Berhasil Fetch Data',$news);
+        return new NewsDetailResource(true, 'Berhasil Fetch Data', $news);
     }
 
     public function update(Request $request, $id)
@@ -58,10 +58,10 @@ class NewsController extends Controller
 
             Storage::delete('/public/newsImage/' . $news->image);
             $news->update($request->all());
-            return new NewsDetailResource(true,'Berhasil Update News',$news);
+            return new NewsDetailResource(true, 'Berhasil Update News', $news);
         } else {
             $news->update($request->all());
-            return new NewsDetailResource(true,'Berhasil Update News',$news);
+            return new NewsDetailResource(true, 'Berhasil Update News', $news);
         }
     }
 
@@ -69,6 +69,6 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
         $news->delete();
-        return new NewsDetailResource(true,'Berhasil Delete News',$news);
+        return new NewsDetailResource(true, 'Berhasil Delete News', $news);
     }
 }

@@ -90,12 +90,6 @@
                     <div data-i18n="Analytics">News</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
-                <a href="{{ route('normal.news.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">News Normal</div>
-                </a>
-            </li>
         </ul>
     @endif
 </aside>

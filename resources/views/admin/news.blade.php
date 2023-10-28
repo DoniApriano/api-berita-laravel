@@ -43,7 +43,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
                                 <div class="col-sm-10">
-                                    <textarea id="content" type="text" name="news_content"
+                                    <textarea id="contentNews" type="text" name="news_content"
                                         class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name"></textarea>
                                 </div>
                                 @error('news_content')
@@ -148,7 +148,7 @@
                                 </tr>
                             @empty
                                 <div class="alert alert-danger alert-dismissible" id="myalert" role="alert">
-                                    Data Kosong
+                                    News is empty
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                                 </div>

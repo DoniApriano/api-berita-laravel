@@ -19,14 +19,14 @@ class CommentController extends Controller
 
     public function showCommentByNews($id)
     {
-        $comment = Comment::with('news:id,title,user_id')->with('user:id,username')->where('news_id', $id)->get();
+        $comment = Comment::with('news:id,title,user_id')->with('user:id,username,profile_picture')->where('news_id', $id)->get();
 
         return new CommentResource(true, 'Berhasil Fetch Comment', $comment);
     }
 
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'news_id' => 'required',
             'text' => 'required',
         ]);
@@ -38,6 +38,6 @@ class CommentController extends Controller
             'text'     => $request->text,
             'user_id' => $userId,
         ]);
-        return new CommentResource(true,'Berhasil Fetch Data',$news);
+        return new CommentResource(true, 'Berhasil Fetch Data', [$news]);
     }
 }

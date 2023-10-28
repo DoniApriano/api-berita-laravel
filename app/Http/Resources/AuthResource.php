@@ -7,6 +7,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthResource extends JsonResource
 {
+    public $status;
+    public $message;
+    public $resource;
+    public $token;
+    public function __construct($status, $message, $resource,$token)
+    {
+        parent::__construct($resource);
+        $this->status  = $status;
+        $this->message = $message;
+        $this->token = $token;
+    }
     /**
      * Transform the resource into an array.
      *
@@ -15,9 +26,10 @@ class AuthResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'username' => $this->username,
-            'email' => $this->email,
-            'token' => $this->createToken('user login')->plainTextToken
+            'status' => $this->status,
+            'message' => $this->message,
+            'data' => $this->resource,
+            'token' => $this->token,
         ];
     }
 }

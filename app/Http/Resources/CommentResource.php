@@ -33,9 +33,9 @@ class CommentResource extends JsonResource
         foreach ($this->resource as $comment) {
             // Konversi objek komentar menjadi array
             $commentArray = json_decode(json_encode($comment), true);
-            
+
             // Buat salinan komentar tanpa 'user_id' dan 'news_id'.
-            $commentWithoutIds = array_diff_key($commentArray, ['user_id' => 0, 'news_id' => 0,'updated_at' => 0]);
+            $commentWithoutIds = array_diff_key($commentArray, ['user_id' => 0, 'news_id' => 0, 'updated_at' => 0]);
             $result['data'][] = $commentWithoutIds;
         }
 
