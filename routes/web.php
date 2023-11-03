@@ -48,7 +48,7 @@ Route::group(['middleware' => 'check-role:root', 'as' => 'root.'], function () {
 });
 
 Route::group(['middleware' => 'check-role:normal', 'as' => 'normal.'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin', [AdminController:: class, 'index'])->name('admin.index');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::resource('/news', NormalNewsController::class);
 });

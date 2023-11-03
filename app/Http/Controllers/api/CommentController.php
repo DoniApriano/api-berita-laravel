@@ -33,11 +33,21 @@ class CommentController extends Controller
 
         $userId = Auth::user()->id;
 
-        $news = Comment::create([
+        $comment = Comment::create([
             'news_id'     => $request->news_id,
             'text'     => $request->text,
             'user_id' => $userId,
         ]);
-        return new CommentResource(true, 'Berhasil Fetch Data', [$news]);
+        return new CommentResource(true, 'Berhasil Fetch Data', [$comment]);
     }
+
+    public function delete($id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return new CommentResource(true, 'Berhasil Hapus Komentar', [$comment]);
+    }
+
+    
+
 }

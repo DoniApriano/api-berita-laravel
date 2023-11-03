@@ -15,13 +15,13 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::with('category:id,name')->with('user:id,username')->get();
+        $news = News::with('category:id,name')->with('user:id,username,profile_picture')->get();
         return new NewsResource(true, 'Berhasil Fetch Data', $news);
     }
 
     public function show($id)
     {
-        $news = News::with('category:id,name')->with('user:id,username')->findOrFail($id);
+        $news = News::with('category:id,name')->with('user:id,username,profile_picture')->findOrFail($id);
         return new NewsDetailResource(true, 'Berhasil Fetch Data', $news);
     }
 
@@ -70,5 +70,11 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         $news->delete();
         return new NewsDetailResource(true, 'Berhasil Delete News', $news);
+    }
+
+    public function showNewsByUserId($id)
+    {
+        $news = News::where('user_id',$id)->get();
+        return new NewsResource(true, "Berhasil fetch news dari id user '$id'", $news);
     }
 }
