@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\CommentController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\NormalNewsController;
 use App\Http\Controllers\admin\RootNewsController;
 use App\Http\Controllers\admin\RootUserController;
@@ -41,14 +42,15 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'check-role:root', 'as' => 'root.'], function () {
-    Route::get('/root', [AdminController::class, 'indexRoot'])->name('admin.index');
+    Route::get('/root', [DashboardController::class, 'indexRoot'])->name('admin.index');
     Route::delete('/logoutRoot', [AuthController::class, 'logout'])->name('admin.logout');
     Route::resource('/newsRoot', RootNewsController::class);
     Route::resource('/userRoot', RootUserController::class);
 });
 
 Route::group(['middleware' => 'check-role:normal', 'as' => 'normal.'], function () {
-    Route::get('/admin', [AdminController:: class, 'index'])->name('admin.index');
+    Route::get('/admin', [DashboardController:: class, 'index'])->name('admin.index');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::resource('/news', NormalNewsController::class);
+    Route::delete('/comment/{id}',[CommentController::class,'deleteComment'])->name('admin.delete.comment');
 });

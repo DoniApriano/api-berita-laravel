@@ -79,7 +79,6 @@
                 </div>
             </div>
         @else
-            <h1>All News</h1>
         @endif
         <div class="col-xxl">
             <div class="card">
@@ -87,12 +86,15 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>News Content</th>
-                                <th>Category</th>
-                                <th>Comment</th>
-                                <th>Action</th>
+                                <th>Gambar</th>
+                                <th>Judul</th>
+                                <th>Isi Berita</th>
+                                <th>Kategori</th>
+                                <th>Komentar</th>
+                                @if (Auth::user()->role == 'root')
+                                    <th>Pengirim</th>
+                                @endif
+                                <th>Asksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -122,6 +124,15 @@
                                             data-newsid="{{ $a->id }}">Comment</button>
                                         @include('admin.layout.modalComment')
                                     </td>
+                                    @if (Auth::user()->role == 'root')
+                                        <td>
+                                            @foreach ($author as $at)
+                                                @if ($at->id == $a->user_id)
+                                                    {{ $at->username }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    @endif
                                     <td>
                                         @if (Auth::user()->role == 'normal')
                                             <form action="{{ route('normal.news.destroy', $a->id) }}"

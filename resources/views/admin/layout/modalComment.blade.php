@@ -17,20 +17,35 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Comment Text</th>
+                                <th scope="col">Tanggal</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($comment as $c)
+                            @forelse ($comment as $c)
                                 @php
                                     $userComment = User::where('id', $c->user_id)->get();
                                 @endphp
                                 <tr>
                                     <td>{{ User::find($c->user_id)->username }}</td>
                                     <td>{{ $c->text }}</td>
-                                    <td><button type="button" class="btn btn-primary">Button</button></td>
+                                    <td>{{ $c->created_at }}</td>
+                                    <td>
+                                        <form onsubmit="return confirm('Yakin ingin menghapus komentar?')"
+                                            action="{{ route('normal.admin.delete.comment', $c->id) }}" method="post">
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#reportUser{{ $c->id }}"><span
+                                                    class="fw-bold">!</span></button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"><i
+                                                    class="bx bx-trash me-1"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <p>Belum ada komentar</p>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -38,3 +53,6 @@
         </div>
     </div>
 </div>
+@foreach ($comment as $c)
+    @include('admin.layout.modalReportAccount')
+@endforeach

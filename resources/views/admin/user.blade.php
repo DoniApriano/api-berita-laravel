@@ -4,19 +4,30 @@
     <div class="container mt-3">
         <div class="col-xxl">
             <div class="card">
+                    <form action="{{ route('root.userRoot.index') }}" method="GET">
+                        <div class="row m-3">
+                            <div class="col-md-10 col-sm-8 col-sm-6 col-sm-4">
+                                <input type="text" class="form-control shadow-none" name="search" placeholder="Search..."
+                                    aria-label="Search...">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Cari</button>
+                            </div>
+                        </div>
+                    </form>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Profile Picture</th>
-                                <th>Username</th>
+                                <th>Gambar Profil</th>
+                                <th>Nama</th>
                                 <th>Email</th>
-                                <th>Date Join</th>
-                                <th>Action</th>
+                                <th>Tanggal Bergabung</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @forelse ($user as $a)
+                            @forelse ($users as $a)
                                 <tr>
                                     <td>
                                         <img width="100px"
@@ -29,11 +40,14 @@
                                     <td>
                                         <form action="{{ route('root.userRoot.destroy', $a->id) }}"
                                             onsubmit="return confirm('Yakin?')" method="post">
+                                            <button type="button" data-bs-target="#userDetail{{ $a->id }}"
+                                                data-bs-toggle="modal" class="btn btn-primary">Detail</button>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"><i
                                                     class="bx bx-trash me-1"></i></button>
                                         </form>
+                                        @include('admin.layout.modalUserDetail')
                                     </td>
                                 </tr>
                             @empty
@@ -45,6 +59,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="m-3">
+                        {{ $users->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>

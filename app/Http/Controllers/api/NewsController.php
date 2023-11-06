@@ -77,4 +77,10 @@ class NewsController extends Controller
         $news = News::where('user_id',$id)->get();
         return new NewsResource(true, "Berhasil fetch news dari id user '$id'", $news);
     }
+
+    public function showNewsByCategoryId($id)
+    {
+        $news = News::where('category_id',$id)->get();
+        return new NewsResource(true, "Berhasil fetch news dari id category '$id'", $news);
+    }
 }

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\FollowController;
 use App\Http\Controllers\api\NewsController;
+use App\Http\Controllers\api\NotificationsController;
 use App\Http\Controllers\api\ReportController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
@@ -35,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/news/{id}', [NewsController::class, 'update'])->middleware('news-owner');
     Route::delete('/news/{id}', [NewsController::class, 'delete'])->middleware('news-owner');
     Route::get('/news/{id}/user', [NewsController::class, 'showNewsByUserId']);
+    Route::get('/news/{id}/category', [NewsController::class, 'showNewsByCategoryId']);
 
     // Route Comment
     Route::get('/comment', [CommentController::class, 'index']);
@@ -57,4 +60,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route Report
     Route::post('/reportComment', [ReportController::class, 'reportComment']);
     Route::post('/reportNews', [ReportController::class, 'reportNews']);
+
+    // Route notifications
+    Route::get('/notif',[NotificationsController::class,'showNotifications']);
+
+    // Route Category
+    Route::get('/category',[CategoryController::class,'index']);
 });

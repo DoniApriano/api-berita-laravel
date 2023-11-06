@@ -66,13 +66,13 @@
             <li class="menu-item {{ Request::is('newsRoot') ? 'active' : '' }}">
                 <a href="{{ route('root.newsRoot.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">News</div>
+                    <div data-i18n="Analytics">Semua Berita</div>
                 </a>
             </li>
             <li class="menu-item {{ Request::is('userRoot') ? 'active' : '' }}">
                 <a href="{{ route('root.userRoot.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">User</div>
+                    <div data-i18n="Analytics">Semua Pengguna</div>
                 </a>
             </li>
         </ul>
@@ -86,8 +86,14 @@
             </li>
             <li class="menu-item {{ Request::is('news') ? 'active' : '' }}">
                 <a href="{{ route('normal.news.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">News</div>
+                    <i class="menu-icon tf-icons bx bxs-news"></i>
+                    <div data-i18n="Analytics">Berita Anda</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('report') ? 'active' : '' }}">
+                <a href="{{ route('normal.news.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-news"></i>
+                    <div data-i18n="Analytics">Laporan</div>
                 </a>
             </li>
         </ul>
