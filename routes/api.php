@@ -37,7 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/news/{id}', [NewsController::class, 'update'])->middleware('news-owner');
     Route::delete('/news/{id}', [NewsController::class, 'delete'])->middleware('news-owner');
     Route::get('/news/{id}/user', [NewsController::class, 'showNewsByUserId']);
-    Route::get('/news/{id}/category', [NewsController::class, 'showNewsByCategoryId']);
+    Route::get('/news/{id}/categoryPaginate', [NewsController::class, 'showNewsByCategoryIdPaginate']);
+    Route::get('/news/{id}/categoryAll', [NewsController::class, 'showNewsByCategoryIdAll']);
 
     // Route Comment
     Route::get('/comment', [CommentController::class, 'index']);
@@ -55,6 +56,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/unFollow/{id}', [FollowController::class, 'unFollow']);
     Route::get('/showFollowing/{id}', [FollowController::class, 'showFollowing']);
     Route::get('/showFollowers/{id}', [FollowController::class, 'showFollowers']);
+    Route::get('/showFollowingByToken', [FollowController::class, 'showFollowingByToken']);
+    Route::get('/showFollowingNewsByToken', [FollowController::class, 'showFollowingNewsByToken']);
     Route::get('/checkIfFollowing/{id}', [FollowController::class, 'checkIfFollowing']);
 
     // Route Report
@@ -62,8 +65,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/reportNews', [ReportController::class, 'reportNews']);
 
     // Route notifications
-    Route::get('/notif',[NotificationsController::class,'showNotifications']);
+    Route::get('/notif', [NotificationsController::class, 'showNotifications']);
 
     // Route Category
-    Route::get('/category',[CategoryController::class,'index']);
+    Route::get('/category', [CategoryController::class, 'index']);
 });

@@ -6,11 +6,11 @@
             <div class="card">
                     <form action="{{ route('root.userRoot.index') }}" method="GET">
                         <div class="row m-3">
-                            <div class="col-md-10 col-sm-8 col-sm-6 col-sm-4">
+                            <div class="col-9">
                                 <input type="text" class="form-control shadow-none" name="search" placeholder="Search..."
                                     aria-label="Search...">
                             </div>
-                            <div class="col">
+                            <div class="col-2">
                                 <button type="submit" class="btn btn-primary">Cari</button>
                             </div>
                         </div>

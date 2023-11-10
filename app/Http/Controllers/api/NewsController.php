@@ -74,13 +74,19 @@ class NewsController extends Controller
 
     public function showNewsByUserId($id)
     {
-        $news = News::where('user_id',$id)->get();
+        $news = News::where('user_id', $id)->get();
         return new NewsResource(true, "Berhasil fetch news dari id user '$id'", $news);
     }
 
-    public function showNewsByCategoryId($id)
+    public function showNewsByCategoryIdPaginate($id)
     {
-        $news = News::where('category_id',$id)->get();
+        $news = News::with('category:id,name')->with('user:id,username,profile_picture')->where('category_id', $id)->latest()->paginate(2);
+        return new NewsResource(true, "Berhasil fetch news dari id category '$id'", $news);
+    }
+
+    public function showNewsByCategoryIdAll($id)
+    {
+        $news = News::with('category:id,name')->with('user:id,username,profile_picture')->where('category_id', $id)->latest()->get();
         return new NewsResource(true, "Berhasil fetch news dari id category '$id'", $news);
     }
 }
