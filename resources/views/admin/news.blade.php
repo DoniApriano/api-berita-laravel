@@ -82,6 +82,30 @@
         @endif
         <div class="col-xxl">
             <div class="card">
+                @if (Auth::user()->role == 'root')
+                    <form action="{{ route('root.newsRoot.index') }}" method="GET">
+                        <div class="row m-3">
+                            <div class="col-5">
+                                <input type="text" class="form-control shadow-none" name="search"
+                                    placeholder="Search..." aria-label="Search...">
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <select class="form-select form-select" name="category_search" id="">
+                                        <option selected>Semua Kategori</option>
+                                        @foreach ($category as $cs)
+                                            <option value="{{ $cs->id }}">{{ $cs->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                @else
+                @endif
                 <div class="table-responsive text-nowrap">
                     <table class="table table-hover">
                         <thead>
@@ -98,30 +122,30 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @forelse ($news as $a)
+                            @forelse ($news as $an)
                                 <tr>
                                     <td>
-                                        <img width="300px" src="{{ asset('/storage/newsImage/' . $a->image) }}"
+                                        <img width="300px" src="{{ asset('/storage/newsImage/' . $an->image) }}"
                                             class="img-fluid rounded-3" alt="">
                                     </td>
-                                    <td>{{ $a->title }}</td>
+                                    <td>{{ $an->title }}</td>
                                     <td>
                                         <p>@php
-                                            $article = $a->news_content;
+                                            $article = $an->news_content;
                                             $limitedArticle = Str::limit($article, $limit = 50, $end = '...');
                                             $replacedText = str_replace('contoh', 'contoh lain', $limitedArticle);
                                         @endphp
                                             {{ $replacedText }}</p>
                                     </td>
                                     @foreach ($category as $c)
-                                        @if ($c->id === $a->category_id)
+                                        @if ($c->id === $an->category_id)
                                             <td>{{ $c->name }}</td>
                                         @endif
                                     @endforeach
                                     <td>
                                         <button type="button" class="btn btn-success comment-button" data-bs-toggle="modal"
-                                            data-bs-target="#commentNews{{ $a->id }}"
-                                            data-newsid="{{ $a->id }}">Comment</button>
+                                            data-bs-target="#commentNews{{ $an->id }}"
+                                            data-newsid="{{ $an->id }}">Comment</button>
                                         @include('admin.layout.modalComment')
                                     </td>
                                     @if (Auth::user()->role == 'root')
@@ -135,10 +159,10 @@
                                     @endif
                                     <td>
                                         @if (Auth::user()->role == 'normal')
-                                            <form action="{{ route('normal.news.destroy', $a->id) }}"
+                                            <form action="{{ route('normal.news.destroy', $an->id) }}"
                                                 onsubmit="return confirm('Yakin?')" method="post">
                                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#editNews{{ $a->id }}"><i
+                                                    data-bs-target="#editNews{{ $an->id }}"><i
                                                         class="bx bx-edit-alt me-2"></i></button>
                                                 @csrf
                                                 @method('DELETE')
@@ -146,7 +170,7 @@
                                                         class="bx bx-trash me-1"></i></button>
                                             </form>
                                         @else
-                                            <form action="{{ route('root.newsRoot.destroy', $a->id) }}"
+                                            <form action="{{ route('root.newsRoot.destroy', $an->id) }}"
                                                 onsubmit="return confirm('Yakin?')" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -166,6 +190,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="m-3">
+                        {{ $news->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>

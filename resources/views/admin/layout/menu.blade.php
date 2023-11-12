@@ -65,14 +65,26 @@
             </li>
             <li class="menu-item {{ Request::is('newsRoot') ? 'active' : '' }}">
                 <a href="{{ route('root.newsRoot.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <i class="menu-icon tf-icons bx bxs-news"></i>
                     <div data-i18n="Analytics">Semua Berita</div>
                 </a>
             </li>
             <li class="menu-item {{ Request::is('userRoot') ? 'active' : '' }}">
                 <a href="{{ route('root.userRoot.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <i class="menu-icon tf-icons bx bxs-user"></i>
                     <div data-i18n="Analytics">Semua Pengguna</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('commentRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.commentRoot.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-comment"></i>
+                    <div data-i18n="Analytics">Semua Komentar</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('reportRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.reportRoot.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-report"></i>
+                    <div data-i18n="Analytics">Semua Laporan</div>
                 </a>
             </li>
         </ul>

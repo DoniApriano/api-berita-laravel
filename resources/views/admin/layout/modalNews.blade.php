@@ -1,4 +1,4 @@
-<div class="modal fade" id="editNews{{ $a->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="editNews{{ $an->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,29 +6,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img class="img-fluid p-3" src="{{ asset('storage/newsImage/'.$a->image) }}" alt="" srcset="">
-                <form action="{{ route('normal.news.update', $a->id) }}" method="post" enctype="multipart/form-data">
+                <img class="img-fluid p-3" src="{{ asset('storage/newsImage/'.$an->image) }}" alt="" srcset="">
+                <form action="{{ route('normal.news.update', $an->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row text-center mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-message">Image</label>
                         <div class="col-sm-10">
-                            <input type="file" name="image" value="{{ $a->image }}"
+                            <input type="file" name="image" value="{{ $an->image }}"
                                 class="form-control @error('image') is-invalid @enderror" id="basic-default-name">
                         </div>
                     </div>
                     <div class="row text-center mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-message">Title</label>
                         <div class="col-sm-10">
-                            <input type="text" name="title" value="{{ $a->title }}"
+                            <input type="text" name="title" value="{{ $an->title }}"
                                 class="form-control @error('title') is-invalid @enderror" id="basic-default-name">
                         </div>
                     </div>
                     <div class="row text-center mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-message">News Content</label>
                         <div class="col-sm-10">
-                            <textarea id="content{{ $a->id }}" type="text" name="news_content"
-                                class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name">{{ $a->news_content }}</textarea>
+                            <textarea id="content{{ $an->id }}" type="text" name="news_content"
+                                class="form-control @error('news_content') is-invalid @enderror" id="basic-default-name">{{ $an->news_content }}</textarea>
                         </div>
                     </div>
                     <div class="row text-center mb-3">
@@ -37,7 +37,7 @@
                             <select class="form-select form-select-lg" name="category_id" id="basic-default-message">
                                 @foreach ($category as $c)
                                     <option value="{{ $c->id }}"
-                                        {{ $c->id === $a->category_id ? 'selected' : '' }}>
+                                        {{ $c->id === $an->category_id ? 'selected' : '' }}>
                                         {{ $c->name }}
                                     </option>
                                 @endforeach

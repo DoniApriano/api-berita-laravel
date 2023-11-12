@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/news', [NewsController::class, 'store']);
     Route::put('/news/{id}', [NewsController::class, 'update'])->middleware('news-owner');
     Route::delete('/news/{id}', [NewsController::class, 'delete'])->middleware('news-owner');
+    Route::get('/latestNews', [NewsController::class, 'latestNews']);
     Route::get('/news/{id}/user', [NewsController::class, 'showNewsByUserId']);
     Route::get('/news/{id}/categoryPaginate', [NewsController::class, 'showNewsByCategoryIdPaginate']);
     Route::get('/news/{id}/categoryAll', [NewsController::class, 'showNewsByCategoryIdAll']);

@@ -72,6 +72,12 @@ class NewsController extends Controller
         return new NewsDetailResource(true, 'Berhasil Delete News', $news);
     }
 
+    public function latestNews()
+    {
+        $news = News::with('category:id,name')->with('user:id,username,profile_picture')->latest()->paginate(5);
+        return new NewsDetailResource(true, 'Berhasil fetch', $news);
+    }
+
     public function showNewsByUserId($id)
     {
         $news = News::where('user_id', $id)->get();

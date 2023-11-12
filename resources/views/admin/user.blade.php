@@ -4,17 +4,17 @@
     <div class="container mt-3">
         <div class="col-xxl">
             <div class="card">
-                    <form action="{{ route('root.userRoot.index') }}" method="GET">
-                        <div class="row m-3">
-                            <div class="col-9">
-                                <input type="text" class="form-control shadow-none" name="search" placeholder="Search..."
-                                    aria-label="Search...">
-                            </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary">Cari</button>
-                            </div>
+                <form action="{{ route('root.userRoot.index') }}" method="GET">
+                    <div class="row m-3">
+                        <div class="col-9">
+                            <input type="text" class="form-control shadow-none" name="search" placeholder="Search..."
+                                aria-label="Search...">
                         </div>
-                    </form>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-hover">
                         <thead>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="followers{{ $a->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="following{{ $a->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,14 +15,14 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @forelse ($allFollowers[$a->id] as $afs)
+                            @forelse ($allFollowing[$a->id] as $afng)
                                 <tr>
                                     <td>
                                         <img class="rounded" width="150"
-                                            src="{{ asset('/storage/userProfilePicture/' . $afs['followers']->profile_picture) }}">
+                                            src="{{ asset('/storage/userProfilePicture/' . $afng['followings']->profile_picture) }}">
                                     </td>
                                     <td>
-                                        <p>{{ $afs['followers']->username}}</p>
+                                        <p>{{ $afng['followings']->username }}</p>
                                     </td>
                                 </tr>
                             @empty
@@ -36,5 +36,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

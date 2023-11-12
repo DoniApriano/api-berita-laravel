@@ -14,7 +14,9 @@
                         </div>
                         <div class="col m-3">
                             <h6 class="">Username : {{ $a->username }}</h6>
-                            <p>Jumlah Mengikuti : <button class="btn btn-primary">{{ $following[$a->id] }}</button></p>
+                            <p>Jumlah Mengikuti : <button data-bs-toggle="modal"
+                                    data-bs-target="#following{{ $a->id }}"
+                                    class="btn btn-primary">{{ $following[$a->id] }}</button></p>
                             <p>Jumlah Pengikut : <button data-bs-toggle="modal"
                                     data-bs-target="#followers{{ $a->id }}"
                                     class="btn btn-primary">{{ $followers[$a->id] }}</button></p>
@@ -60,7 +62,6 @@
                                         <button type="button" class="btn btn-success comment-button"
                                             data-bs-toggle="modal" data-bs-target="#commentNews{{ $an->id }}"
                                             data-newsid="{{ $an->id }}">Comment</button>
-                                        @include('admin.layout.modalComment')
                                     </td>
                                     <td>
                                         <form action="{{ route('root.newsRoot.destroy', $an->id) }}"
@@ -86,4 +87,8 @@
         </div>
     </div>
 </div>
+@foreach ($allNews[$a->id] as $an)
+    @include('admin.layout.modalComment')
+@endforeach
 @include('admin.layout.modalFollowers')
+@include('admin.layout.modalFollowing')

@@ -17,7 +17,7 @@ class NormalNewsController extends Controller
     {
         $userId = Auth::user()->id;
         $profilePicture = Auth::user()->profile_picture;
-        $news = News::where('user_id', $userId)->get();
+        $news = News::where('user_id', $userId)->paginate(4);
         $category = Category::get();
         $newsId = $request->input('news_id');
         $pageTitle = "Halaman Berita";

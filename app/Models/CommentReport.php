@@ -15,4 +15,18 @@ class CommentReport extends Model
         "comment_id",
         "description",
     ];
+
+    public function reporter()
+    {
+        return $this->belongsTo(User::class,'reporter_user_id','id');
+    }
+
+    public function reported()
+    {
+        return $this->belongsTo(User::class,'reported_user_id','id');
+    }
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class,'comment_id','id');
+    }
 }
