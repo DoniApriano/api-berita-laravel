@@ -6,7 +6,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img class="img-fluid p-3" src="{{ asset('storage/newsImage/'.$an->image) }}" alt="" srcset="">
+                <div class="text-center">
+                    <img class="img-fluid p-3" src="{{ asset('storage/newsImage/'.$an->image) }}" alt="" srcset="">
+                </div>
                 <form action="{{ route('normal.news.update', $an->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

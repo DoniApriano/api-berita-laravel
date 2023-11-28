@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NewsReport extends Model
+class SubmissionRequest extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "reporter_user_id",
-        "reported_user_id",
-        "news_id",
-        "description",
+        "user_id",
+        "text",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

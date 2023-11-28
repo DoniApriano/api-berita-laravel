@@ -4,9 +4,11 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\NormalCommentController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\NormalNewsController;
+use App\Http\Controllers\admin\RootCategoryController;
 use App\Http\Controllers\admin\RootCommentController;
 use App\Http\Controllers\admin\RootNewsController;
 use App\Http\Controllers\admin\RootReportController;
+use App\Http\Controllers\admin\RootSubmissionController;
 use App\Http\Controllers\admin\RootUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,8 @@ Route::group(['middleware' => 'check-role:root', 'as' => 'root.'], function () {
     Route::resource('/userRoot', RootUserController::class);
     Route::resource('/reportRoot', RootReportController::class);
     Route::resource('/commentRoot', RootCommentController::class);
+    Route::resource('/submissionRoot', RootSubmissionController::class);
+    Route::resource('/categoryRoot', RootCategoryController::class);
 });
 
 Route::group(['middleware' => 'check-role:normal', 'as' => 'normal.'], function () {

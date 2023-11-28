@@ -31,7 +31,7 @@ class NormalNewsController extends Controller
             'news_content' => 'required',
             'title' => 'required',
             'category_id' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|dimensions:ratio=16/9',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
         ]);
 
         $userId = Auth::user()->id;
@@ -47,13 +47,6 @@ class NormalNewsController extends Controller
             'category_id'     => $request->category_id,
         ]);
 
-        $newsId = $news->id;
-        $notif = Notification::create([
-            'news_id' => $newsId,
-            'user_id' => Auth::user()->id,
-            'description' => 'Menambahkan berita',
-        ]);
-
         return redirect()->route('normal.news.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -64,7 +57,8 @@ class NormalNewsController extends Controller
             Storage::delete('/public/newsImage/' . $news->image);
         }
         $comment = Comment::where('news_id', $news->id);
-
+        $notif = Notification::where('news_id', $news->id);
+        $notif->delete();
         $comment->delete();
         $news->delete();
         return back()->with('success', 'Berhasil Hapus');
@@ -76,7 +70,7 @@ class NormalNewsController extends Controller
             'news_content' => 'required',
             'title' => 'required',
             'category_id' => 'required',
-            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|dimensions:ratio=16/9',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|',
         ]);
 
         $news = News::findOrFail($id);
@@ -84,12 +78,12 @@ class NormalNewsController extends Controller
             $image = $request->image;
             $image->storeAs('/public/newsImage/'.$image->hashName());
 
-            Storage::delete('/public/newsImage'. $news->image);
+            Storage::delete('/public/newsImage/'. $news->image);
 
             $news->update([
                 'image' => $image->hashName(),
                 'title' => $request->title,
-                'category_id'=> $request->category,
+                'category_id'=> $request->category_id,
                 'news_content' => $request->news_content,
             ]);
         } else {

@@ -18,4 +18,14 @@ class RootReportController extends Controller
         $profilePicture = $user->profile_picture;
         return view("admin.report",compact(["report","pageTitle","profilePicture"]));
     }
+
+    public function update($id)
+    {
+        $commentReports = CommentReport::findOrFail($id);
+        $commentReports->update([
+            "status"=> "responded"
+        ]);
+
+        return back()->with("success","Berhasil menanggapi laporan");
+    }
 }

@@ -87,6 +87,18 @@
                     <div data-i18n="Analytics">Semua Laporan</div>
                 </a>
             </li>
+            <li class="menu-item {{ Request::is('submissionRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.submissionRoot.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-report"></i>
+                    <div data-i18n="Analytics">Semua Permintaan</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('categoryRoot') ? 'active' : '' }}">
+                <a href="{{ route('root.categoryRoot.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-category    "></i>
+                    <div data-i18n="Analytics">Semua Permintaan</div>
+                </a>
+            </li>
         </ul>
     @else
         <ul class="menu-inner py-1">

@@ -1,4 +1,4 @@
-<div class="modal fade" id="respond{{ $r->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="submission{{ $r->id }}" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,11 +6,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('root.reportRoot.update', $r->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('root.submissionRoot.update', $r->id) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Kirim</button>
+                        <textarea placeholder="Respon" id="contentNews" type="text" name="respond"
+                            class="form-control @error('respond') is-invalid @enderror" id="basic-default-name"></textarea>
+                        <button type="submit" class="btn btn-primary mt-2">Kirim</button>
                     </div>
                 </form>
             </div>

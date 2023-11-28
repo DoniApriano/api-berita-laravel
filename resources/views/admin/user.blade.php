@@ -4,6 +4,12 @@
     <div class="container mt-3">
         <div class="col-xxl">
             <div class="card">
+                @if (Session::has('success'))
+                    <div id="myalert" class="alert alert-success alert-dismissible" role="alert">
+                        {{ Session::get('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <form action="{{ route('root.userRoot.index') }}" method="GET">
                     <div class="row m-3">
                         <div class="col-9">

@@ -19,6 +19,7 @@
                         <tr>
                             <th>Username</th>
                             <th>Komentar</th>
+                            <th>Status</th>
                             <th>Berita</th>
                             <th>Tanggal</th>
                             <th>Aksi</th>
@@ -32,12 +33,21 @@
                                         href="{{ route('root.userRoot.show', $c['user']->email) }}">{{ $c['user']->username }}</a>
                                 </td>
                                 <td>{{ $c->text }}</td>
+                                <td>{{ $c->status }}</td>
                                 <td>
                                     <a class="text-decoration-underline"
                                         href="{{ route('root.newsRoot.show', $c['news']->title) }}">{{ $c['news']->title }}</a>
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($c->created_at)->formatLocalized('%d %B %y') }}</td>
-                                <td><button type="submit" class="btn btn-danger bx bxs-trash"></button></td>
+                                <td>
+                                    <form onsubmit="return confirm('Yakin ingin menghapus komentar?')"
+                                        action="{{ route('root.commentRoot.destroy', $c->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i
+                                                class="bx bx-trash me-1"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @empty
                             <h4>tidak ada komentar</h4>

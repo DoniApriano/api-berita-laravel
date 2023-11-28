@@ -4,11 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Follow;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RootUserController extends Controller
 {
@@ -85,5 +87,19 @@ class RootUserController extends Controller
         }
 
         return view("admin.user", compact(["users", "profilePicture", "pageTitle", "followers", "following", "news", "allNews", "category", "allFollowers", "allFollowing"]));
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if (Storage::exists('/public/userProfilePicture/' . $user->profile_picture)) {
+            Storage::delete('/public/userProfilePicture/' . $user->profile_picture);
+        }
+        $comment = Comment::where('user_id', $user->id);
+        $news = News::where('user_id', $user->id);
+        $comment->delete();
+        $news->delete();
+        $user->delete();
+        return back()->with('success', 'Berhasil Hapus');
     }
 }

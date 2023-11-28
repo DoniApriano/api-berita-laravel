@@ -20,10 +20,10 @@ class NotificationsController extends Controller
         //     return new NotificationsResource(true, 'Berhasil fetch', [$follow[$i++]]);
         //     $i++;
         // }
-
+        $notif = [];
         foreach ($follow as $follower) {
             $notif = Notification::where("user_id", $follower['following'])->get();
-            return new NotificationsResource(true, 'Berhasil fetch', $notif);
         }
+        return new NotificationsResource(true, 'Berhasil fetch', $notif);
     }
 }

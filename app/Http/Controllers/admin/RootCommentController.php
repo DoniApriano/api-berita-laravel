@@ -45,4 +45,12 @@ class RootCommentController extends Controller
 
         return view("admin.comment", compact(["profilePicture", "pageTitle", "comment"]));
     }
+
+    public function destroy(Request $request,$id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->status = "false";
+        $comment->save();
+        return back()->with('success','Berhasil hapus komentar');
+    }
 }

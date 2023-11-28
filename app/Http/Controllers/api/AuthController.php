@@ -68,4 +68,24 @@ class AuthController extends Controller
         $user = Auth::user();
         return new UserResource(true, 'Berhasil Fetch Me', $user);
     }
+
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return new UserResource(false,'Password lama anda tidak valid', []);
+        }
+
+        User::whereId($user->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return new UserResource(true,'Password berhasil', []);
+
+    }
 }

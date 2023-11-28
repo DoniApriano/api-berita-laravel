@@ -32,10 +32,7 @@
                                     <td>{{ $c->created_at }}</td>
                                     <td>
                                         <form onsubmit="return confirm('Yakin ingin menghapus komentar?')"
-                                            action="{{ route('normal.admin.delete.comment', $c->id) }}" method="post">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#reportUser{{ $c->id }}"><span
-                                                    class="fw-bold">!</span></button>
+                                            action="{{ route('root.commentRoot.destroy', $c->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"><i

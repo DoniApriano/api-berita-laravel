@@ -5,17 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CommentReport extends Model
+class ReportRespond extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        "reporter_user_id",
-        "reported_user_id",
-        "comment_id",
-        "description",
-        "status",
-    ];
 
     public function reporter()
     {
@@ -29,5 +21,9 @@ class CommentReport extends Model
     public function comment()
     {
         return $this->belongsTo(Comment::class,'comment_id','id');
+    }
+    public function commentReport()
+    {
+        return $this->belongsTo(CommentReport::class,'comment_report_id','id');
     }
 }

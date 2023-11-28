@@ -2,6 +2,12 @@
 @section('content')
     <div class="container mt-3">
         <div class="card">
+            @if (Session::has('success'))
+                <div id="myalert" class="alert alert-success alert-dismissible" role="alert">
+                    {{ Session::get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="table-responsive text-nowrap">
                 <table class="table table-hover">
                     <thead>

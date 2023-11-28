@@ -83,6 +83,12 @@
         <div class="col-xxl">
             <div class="card">
                 @if (Auth::user()->role == 'root')
+                    @if (Session::has('success'))
+                        <div id="myalert" class="alert alert-success alert-dismissible" role="alert">
+                            {{ Session::get('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form action="{{ route('root.newsRoot.index') }}" method="GET">
                         <div class="row m-3">
                             <div class="col-5">
@@ -91,10 +97,10 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <select class="form-select form-select" name="category_search" id="">
+                                    <select class="form-select form-select" name="category" id="">
                                         <option selected>Semua Kategori</option>
                                         @foreach ($category as $cs)
-                                            <option value="{{ $cs->id }}">{{ $cs->name }}</option>
+                                            <option value="{{ $cs->name }}">{{ $cs->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -151,7 +157,7 @@
                                     @if (Auth::user()->role == 'root')
                                         <td>
                                             @foreach ($author as $at)
-                                                @if ($at->id == $a->user_id)
+                                                @if ($at->id == $an->user_id)
                                                     {{ $at->username }}
                                                 @endif
                                             @endforeach

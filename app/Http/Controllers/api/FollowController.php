@@ -50,7 +50,7 @@ class FollowController extends Controller
 
     public function showFollowing($id)
     {
-        $follow = Follow::where('user_id', $id)->with('following')->get();
+        $follow = Follow::where('user_id', $id)->with('followings')->get();
         $countOfFolloweing = Follow::where('user_id', $id)->count();
         return new FollowResource(true, 'Berhasil fetch', ["following" => $follow, "count" => $countOfFolloweing]);
     }
@@ -64,13 +64,13 @@ class FollowController extends Controller
 
     public function showFollowingByToken()
     {
-        $follow = Follow::where('user_id', Auth::user()->id)->with('following')->get();
+        $follow = Follow::where('user_id', Auth::user()->id)->with('followings')->get();
         $countOfFollowers = Follow::where('user_id', Auth::user()->id)->count();
         return new FollowResource(true, 'Berhasil fetch', ["followers" => $follow, "count" => $countOfFollowers]);
     }
     public function showFollowingNewsByToken()
     {
-        $follow = Follow::where('user_id', Auth::user()->id)->with('following')->latest()->get();
+        $follow = Follow::where('user_id', Auth::user()->id)->with('followings')->latest()->get();
         $news = [];
         foreach ($follow as $f) {
             $newsFollowing = News::where('user_id', $f->following)->with('user')->get();

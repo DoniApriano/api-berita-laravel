@@ -12,14 +12,14 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comment = Comment::with('user:id,username')->with('news:id,title,user_id')->get();
+        $comment = Comment::where('status', 'true')->with('user')->with('news')->get();
 
         return new CommentResource(true, 'Berhasil Fetch Comment', $comment);
     }
 
     public function showCommentByNews($id)
     {
-        $comment = Comment::with('news:id,title,user_id')->with('user:id,username,profile_picture')->where('news_id', $id)->get();
+        $comment = Comment::where('status', 'true')->with('news')->with('user')->where('news_id', $id)->get();
 
         return new CommentResource(true, 'Berhasil Fetch Comment', $comment);
     }
@@ -47,7 +47,4 @@ class CommentController extends Controller
         $comment->delete();
         return new CommentResource(true, 'Berhasil Hapus Komentar', [$comment]);
     }
-
-    
-
 }
