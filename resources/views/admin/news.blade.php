@@ -156,11 +156,8 @@
                                     </td>
                                     @if (Auth::user()->role == 'root')
                                         <td>
-                                            @foreach ($author as $at)
-                                                @if ($at->id == $an->user_id)
-                                                    {{ $at->username }}
-                                                @endif
-                                            @endforeach
+                                            <a class="text-decoration-underline"
+                                                href="{{ route('root.userRoot.show', $an['user']->email) }}">{{ $an['user']->username }}</a>
                                         </td>
                                     @endif
                                     <td>

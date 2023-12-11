@@ -41,7 +41,7 @@
                                     {{ $c->name }}
                                 </td>
                                 <td>
-                                    <form onsubmit="return confirm('Yakin ingin menghapus komentar?')"
+                                    <form onsubmit="return confirm('Yakin ingin menghapus kategori?')"
                                         action="{{ route('root.categoryRoot.destroy', $c->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')

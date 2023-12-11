@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,10 +35,17 @@ class RootCategoryController extends Controller
         return back()->with('success', 'Berhasil menambah kategori');
     }
 
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $category = Category::findOrFail($id);
+        $news = $category->news;
+
+        foreach ($news as $item) {
+            $item->delete();
+        }
+
         $category->delete();
-        return back()->with('success','Berhasil hapus kategori');
+
+        return back()->with('success', 'Berhasil hapus kategori');
     }
 }

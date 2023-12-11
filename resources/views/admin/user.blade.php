@@ -21,6 +21,9 @@
                         </div>
                     </div>
                 </form>
+                <div class="mx-3">
+                    <button type="submit" class="btn btn-success">Cetak</button>
+                </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-hover">
                         <thead>
