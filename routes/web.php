@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\NormalNewsController;
 use App\Http\Controllers\admin\RootCategoryController;
 use App\Http\Controllers\admin\RootCommentController;
 use App\Http\Controllers\admin\RootNewsController;
+use App\Http\Controllers\admin\RootPrintController;
 use App\Http\Controllers\admin\RootReportController;
 use App\Http\Controllers\admin\RootSubmissionController;
 use App\Http\Controllers\admin\RootUserController;
@@ -54,6 +55,9 @@ Route::group(['middleware' => 'check-role:root', 'as' => 'root.'], function () {
     Route::resource('/commentRoot', RootCommentController::class);
     Route::resource('/submissionRoot', RootSubmissionController::class);
     Route::resource('/categoryRoot', RootCategoryController::class);
+
+    // Print
+    Route::get('/print',[RootPrintController::class,'print'])->name('print');
 });
 
 Route::group(['middleware' => 'check-role:normal', 'as' => 'normal.'], function () {

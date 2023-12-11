@@ -22,7 +22,7 @@
                     </div>
                 </form>
                 <div class="mx-3">
-                    <button type="submit" class="btn btn-success">Cetak</button>
+                    <a href="{{ route('root.print') }}"  class="btn btn-success">Cetak</a>
                 </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-hover">
